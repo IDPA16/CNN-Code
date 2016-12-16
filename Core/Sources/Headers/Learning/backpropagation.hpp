@@ -25,22 +25,36 @@ namespace Convolutional::Learning {
 		}
 
 		auto EvaluateSet(typename parent_t::networks_t::iterator network, typename TrainingData<Classification>::const_iterator set) -> void override {
-			network->GetOutputsUsingMatrix(set->multiMatrix);
+			auto outputs = network->GetOutputsUsingMatrix(set->multiMatrix);
+			// calc error and add to total_network_errors
+			evaluated_network_count++;
 		}
 
 		auto EndEpoch(typename parent_t::networks_t::iterator network) -> void override {
-			for (auto& layer : layers) {
-				if (auto* filter = dynamic_cast<Layer::Filter*>(&layer)) {
-					filter->DoStuff();
+			for (auto& layer : network->layers) {
+				if (auto* filter = dynamic_cast<Layer::Filter*>(&(*layer))) {
+					// filter->DoStuff();
+					// adjust weights
 				}
 
+				if (auto* maxpooler = dynamic_cast<Layer::Pooler::MaxPooler*>(&(*layer))) {
+					// filter->DoStuff();
+					// adjust weights
+				}
 
+				if (auto* fully_connected = dynamic_cast<Layer::FullyConnectedNeuralNetwork*>(&(*layer))) {
+					// filter->DoStuff();
+					// adjust weights
+				}
 			}
 		}
 
 		auto GetChamp() const -> typename parent_t::network_t override {
 			return parent_t::neuralNetworks.front(); 
 		}
-	};
 
+	private:
+		float total_network_errors;
+		size_t evaluated_network_count;
+	};
 }
