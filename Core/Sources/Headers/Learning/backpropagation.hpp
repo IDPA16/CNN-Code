@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Learning/learning_method.hpp"
 
 namespace Convolutional::Learning {
@@ -16,11 +16,31 @@ namespace Convolutional::Learning {
 			// it's only a testing hack until real logic gets written
 		}
 
-		auto BeginEpoch(typename parent_t::networks_t::iterator network) -> void override {}
-		auto EvaluateSet(typename parent_t::networks_t::iterator network, typename TrainingData<Classification>::const_iterator set) -> void override {network->GetOutputsUsingMatrix(set->multiMatrix);}
-		auto EndEpoch(typename parent_t::networks_t::iterator network) -> void override {}
+		// im doing batch learning.
 
-		auto GetChamp() const -> typename parent_t::network_t override { return parent_t::neuralNetworks.front(); }
+		auto BeginEpoch(typename parent_t::networks_t::iterator network) -> void override {
+			// (zu erreichender - erreichte)^2 durchschnitt von allen trainingssets -> cost function
+
+
+		}
+
+		auto EvaluateSet(typename parent_t::networks_t::iterator network, typename TrainingData<Classification>::const_iterator set) -> void override {
+			network->GetOutputsUsingMatrix(set->multiMatrix);
+		}
+
+		auto EndEpoch(typename parent_t::networks_t::iterator network) -> void override {
+			for (auto& layer : layers) {
+				if (auto* filter = dynamic_cast<Layer::Filter*>(&layer)) {
+					filter->DoStuff();
+				}
+
+
+			}
+		}
+
+		auto GetChamp() const -> typename parent_t::network_t override {
+			return parent_t::neuralNetworks.front(); 
+		}
 	};
 
 }
