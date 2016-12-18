@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <memory>
 #include <stdexcept>
 #include <algorithm>
@@ -28,7 +28,7 @@ namespace Convolutional {
 			return static_cast<Classification>(outputIndex);
 		}
 
-		auto GetOutputsUsingMatrix(const MultiMatrix& multiMatrix) {
+		auto GetOutputsUsingMatrix(const MultiMatrix& multiMatrix) -> std::vector<Matrix::element_t> {
 			auto processedMultiMatrix{ multiMatrix };
 			for (const auto& layer : layers) {
 				processedMultiMatrix = layer->ProcessMultiMatrix(processedMultiMatrix);
