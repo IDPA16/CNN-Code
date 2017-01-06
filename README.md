@@ -9,3 +9,4 @@ Development|[![Build Status](https://travis-ci.org/IDPA16/CNN-Code.svg?branch=de
 - ImageMagick 6.9.6-8 
     - Windows: Get it using [this script](https://github.com/IDPA16/CNN-Code/blob/development/InstallDependencies.ps1)
 
+Moved to https://github.com/IDPA16/Hippocrates
